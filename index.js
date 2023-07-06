@@ -1,5 +1,5 @@
 //Sign up API 
-function SignUp(event) {
+function signUp(event) {
     event.preventDefault();
     
     const spinner = document.querySelector('.spinner')
@@ -51,7 +51,7 @@ function SignUp(event) {
     };
 
       
-    fetch('http://localhost:7100/api/474892/admin/', requestOptions)
+    fetch('https://elehaus-backend.onrender.com/api/474892/admin/', requestOptions)
         .then(response => response.json())
         .then(result => {
             if(result.message === 'success') {
@@ -82,5 +82,75 @@ function SignUp(event) {
     .catch(error => error);
 }
 
-document.getElementById("signup-form").addEventListener("submit", SignUp);
+window.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      document.getElementById('sign-up').click();
+    }
+});
+
+
+//Login API 
+function logIn(event) {
+    event.preventDefault();
+    
+    const spinner = document.querySelector('.spinner')
+    spinner.style.display = 'inline-block';
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if ( !email || !password ) {
+
+        Swal.fire({
+            icon: 'error',
+            text: 'All fields are required!',
+            confirmButtonColor: '#161a3b'
+        })
+
+        spinner.style.display = 'none';
+        return;
+    }
+
+    const data = {
+        email,
+        password,
+    };
+
+      
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+    };
+
+      
+    fetch('https://elehaus-backend.onrender.com/api/474892/admin/login', requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            localStorage.setItem('admin', JSON.stringify(result.token));
+            const getItem = localStorage.getItem('admin');
+            const theItem = JSON.parse(getItem);
+            if (theItem) {
+                location.href = "dashboard.html";
+            }
+
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Invalid Login Credentials!',
+                    confirmButtonColor: '#161a3b'
+                })
+                spinner.style.display = "none";
+            }
+        })
+    .catch(error => error);
+}
+
+window.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      document.getElementById('log-in').click();
+    }
+});
 

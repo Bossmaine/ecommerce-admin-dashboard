@@ -22,7 +22,7 @@
             <a href="#">Forgot Password?</a><br/> 
           </div>
           <div class="form-group">
-            <button type="submit">Login <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="spinner" style="margin: auto; background: none; shape-rendering: auto;" width="38px" height="18px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <button onclick="logIn(event)" id="log-in" type="submit">Login <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="spinner" style="margin: auto; background: none; shape-rendering: auto;" width="38px" height="18px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                 <path d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50" fill="#ffffff" stroke="none">
                   <animateTransform attributeName="transform" type="rotate" dur="0.7407407407407407s" repeatCount="indefinite" keyTimes="0;1" values="0 50 51;360 50 51"></animateTransform>
                 </path>
@@ -35,5 +35,8 @@
     <div class="copy-right">
         <span>&copy; TAM, All Rights Reserved</span>
     </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <script src="index.js"></script>
 </body>
 </html>
