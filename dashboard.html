@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" id="dash">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+  </head>
+  <body id="body-pd">
+    <header class="header" id="header">
+      <div class="header_toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+      <div class="center">
+        <div class="header-msg">
+            <div class="position-relative">
+                <i class="bi bi-envelope-fill"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  5
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </div>
+          </div>
+    
+          <div class="header-contents"> 
+            <div class="header_img">
+                <img src="images/pretty-young-african-woman-smiling-while-holding-her-mobile-phone-outdoors.jpg" alt="" />
+            </div>
+    
+            <div class="header-texts">
+                <h5>Aisha Oseni</h5>
+                <p>Admin</p>
+            </div>
+          </div>
+      </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="dashboard.html" class="nav_logo">
+            <img src="images/TAM-LOGO-Remodel-02@2x.jpg" alt="logo" class="nav_logo-icon">
+            <span class="nav_logo-name">Admin Dashboard</span>
+          </a>
+          <div class="nav_list">
+            <a href="#" class="nav_link active">
+                <i class="bi bi-clipboard-data-fill"></i>
+                <span class="nav_name">Dashboard</span>
+            </a>
+            <a href="#" class="nav_link">
+                <i class="bi bi-tag-fill"></i>
+                 <span class="nav_name">Products</span>
+            </a>
+            <a href="#" class="nav_link">
+              <i class="bi bi-people-fill"></i>
+              <span class="nav_name">Users</span>
+            </a>
+            <a href="#" class="nav_link">
+              <i class="bi bi-bag-fill"></i>
+              <span class="nav_name">Orders</span>
+            </a>
+            <a href="#" class="nav_link">
+              <i class="bi bi-chat-left-fill"></i>
+              <span class="nav_name">Messages</span>
+            </a>
+          </div>
+        </div>
+        <a href="#" class="nav_link">
+          <i class="bx bx-log-out nav_icon"></i>
+          <span class="nav_name">SignOut</span>
+        </a>
+      </nav>
+    </div>
+    <!--Container Main start-->
+    <div class="dashboard-contents">
+        <div class="dash-cards-section">
+            <div class="dash-card">
+                <div class="dash-texts">
+                    <h5>Total Sales</h5>
+                    <p>4,678</p>
+                </div>
+                <div class="dash-logo center">
+                    <i class="bi bi-receipt"></i>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-texts">
+                    <h5>Total Revenue</h5>
+                    <p>$4,678K</p>
+                </div>
+                <div class="dash-logo center">
+                    <i class="bi bi-cash-coin"></i>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-texts">
+                    <h5>Total Customers</h5>
+                    <p>4,678</p>
+                </div>
+                <div class="dash-logo center">
+                    <i class="bi bi-people"></i>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-texts">
+                    <h5>Pending Orders</h5>
+                    <p>$4,678K</p>
+                </div>
+                <div class="dash-logo center">
+                    <i class="bi bi-hourglass-split"></i>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-texts">
+                    <h5>Total Products</h5>
+                    <p>$4,678K</p>
+                </div>
+                <div class="dash-logo center">
+                    <i class="bi bi-cart4"></i>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-texts">
+                    <h5>Total Delivered</h5>
+                    <p>$4,678K</p>
+                </div>
+                <div class="dash-logo center">
+                    <i class="bi bi-truck"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navToggle.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

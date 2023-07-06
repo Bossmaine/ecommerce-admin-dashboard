@@ -11,22 +11,26 @@
         <div class="logo">
           <img src="images/TAM-LOGO-Remodel-02@2x.jpg" alt="Logo">
         </div>
-        <form>
+        <form id="signup-form" type="submit">
           <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Enter your name">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password">
+            <label for="password">Password *</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
           </div>
           <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" placeholder="Confirm your password">
+            <label for="confirm-password">Confirm Password *</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
+          </div>
+          <div class="form-group">
+            <label for="photo">Photo (Optional)</label>
+            <input type="file" id="photo" name="photo" placeholder="Upload your photo">
           </div>
           <div class="form-group">
             <button type="submit">Sign Up <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="spinner" style="margin: auto; background: none; shape-rendering: auto;" width="38px" height="18px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -42,5 +46,8 @@
     <div class="copy-right">
         <span>&copy; TAM, All Rights Reserved</span>
     </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <script src="index.js"></script>
 </body>
 </html>
