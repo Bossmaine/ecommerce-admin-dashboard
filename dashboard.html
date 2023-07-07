@@ -14,7 +14,7 @@
       href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
     />
   </head>
-  <body id="body-pd">
+  <body id="body-pd" onload="adminDashboard()">
     <header class="header" id="header">
       <div class="header_toggle">
         <i class="bx bx-menu" id="header-toggle"></i>
@@ -32,11 +32,11 @@
     
           <div class="header-contents"> 
             <div class="header_img">
-                <img src="images/pretty-young-african-woman-smiling-while-holding-her-mobile-phone-outdoors.jpg" alt="" />
+                <img id="admin-img" alt="" />
             </div>
     
             <div class="header-texts">
-                <h5>Aisha Oseni</h5>
+                <h5 id="admin-name"></h5>
                 <p>Admin</p>
             </div>
           </div>
@@ -72,10 +72,10 @@
             </a>
           </div>
         </div>
-        <a href="#" class="nav_link">
+        <div onclick="signOut()" class="nav_link sign-out">
           <i class="bx bx-log-out nav_icon"></i>
           <span class="nav_name">SignOut</span>
-        </a>
+        </div>
       </nav>
     </div>
     <!--Container Main start-->
@@ -84,7 +84,7 @@
             <div class="dash-card">
                 <div class="dash-texts">
                     <h5>Total Sales</h5>
-                    <p>4,678</p>
+                    <p id="total-sales"></p>
                 </div>
                 <div class="dash-logo center">
                     <i class="bi bi-receipt"></i>
@@ -94,7 +94,7 @@
             <div class="dash-card">
                 <div class="dash-texts">
                     <h5>Total Revenue</h5>
-                    <p>$4,678K</p>
+                    <p id="total-revenue"></p>
                 </div>
                 <div class="dash-logo center">
                     <i class="bi bi-cash-coin"></i>
@@ -104,7 +104,7 @@
             <div class="dash-card">
                 <div class="dash-texts">
                     <h5>Total Customers</h5>
-                    <p>4,678</p>
+                    <p id="total-customers"></p>
                 </div>
                 <div class="dash-logo center">
                     <i class="bi bi-people"></i>
@@ -114,7 +114,7 @@
             <div class="dash-card">
                 <div class="dash-texts">
                     <h5>Pending Orders</h5>
-                    <p>$4,678K</p>
+                    <p id="pending-orders"></p>
                 </div>
                 <div class="dash-logo center">
                     <i class="bi bi-hourglass-split"></i>
@@ -124,7 +124,7 @@
             <div class="dash-card">
                 <div class="dash-texts">
                     <h5>Total Products</h5>
-                    <p>$4,678K</p>
+                    <p id="total-products"></p>
                 </div>
                 <div class="dash-logo center">
                     <i class="bi bi-cart4"></i>
@@ -134,12 +134,27 @@
             <div class="dash-card">
                 <div class="dash-texts">
                     <h5>Total Delivered</h5>
-                    <p>$4,678K</p>
+                    <p id="total-delivered"></p>
                 </div>
                 <div class="dash-logo center">
                     <i class="bi bi-truck"></i>
                 </div>
             </div>
+        </div>
+        <div class="dashboard-table-section mt-5">
+          <table class="table table-hover" id="table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Payment Status</th>
+                <th scope="col">Order Status</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider" id="order-table">
+      
+            </tbody>
+          </table>
         </div>
     </div>
 
@@ -147,5 +162,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="navToggle.js"></script>
     <script src="index.js"></script>
+    <script src="oauth.js"></script>
   </body>
 </html>

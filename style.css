@@ -239,8 +239,12 @@ body {
     left: 0
 }
 
-#body-pd {
+.body-pd {
     padding-left: calc(var(--nav-width) + 1rem)
+}
+
+.sign-out {
+    cursor: pointer;
 }
 
 .active {
@@ -320,6 +324,14 @@ body {
     color: var(--first-color);
 }
 
+.dashboard-table-section {
+    overflow: auto!important;
+}
+
+.table-hover tr {
+    cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
     #body-pd {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -357,6 +369,7 @@ body {
 @media screen and (max-width: 569px) {
     .dashboard-contents {
         margin: 0;
+        padding: 0;
     }
 
     .header-msg {
