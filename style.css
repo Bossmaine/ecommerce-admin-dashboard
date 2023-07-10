@@ -76,7 +76,7 @@ body {
     background-color: #95c997;
 }
 
-.spinner {
+.spinner, .spinner2 {
     display: none;
 }
 
@@ -332,7 +332,104 @@ body {
     cursor: pointer;
 }
 
-@media screen and (min-width: 768px) {
+.dashboard-contents h3 {
+    font-weight: 800;
+    color: var(--first-color);
+}
+
+.pagemodal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.82);
+}
+
+
+.preloader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 9999;
+    width: 120px;
+    height: 120px;
+    margin: -76px 0 0 -76px;
+    border-radius: 50%;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+.modal-content {
+    background-color: var(--first-color) !important ;
+    color: var(--white-color) !important;
+}
+
+.modal button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.form-control-file {
+    cursor: pointer;
+}
+
+#input-warning, #input-success, #input-failed {
+    display: none;
+    color: red;
+    font-size: x-small;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#input-success {
+    color: green!important;
+}
+
+#otp-form {
+    color: #F7F6FB;
+    display: none;
+}
+
+#update-password-form {
+    display: none;
+}
+
+#retrieve-password-form button {
+    width: 50%;
+}
+
+.otp-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.otp {
+    outline: 2px solid #6b6868;
+    text-align: center;
+    max-width: 2em;
+    min-width: 1em;
+}
+
+#otp7 {
+    display: none;
+}
+
+.otp-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#refresh-otp {
+    background-color: transparent;
+}
+
+@media screen and (min-width: 568px) {
     #body-pd {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
         padding-left: calc(var(--nav-width) + 2rem)
@@ -364,6 +461,12 @@ body {
     .body-pd {
         padding-left: calc(var(--nav-width) + 188px)
     }
+
+    .dashboard-contents {
+        margin: 10px;
+        padding: 10px;
+    }
+    
 }
 
 @media screen and (max-width: 569px) {
