@@ -177,6 +177,7 @@ body {
 .header-msg i {
     font-size: 25px;
     color: var(--first-color);
+    cursor: pointer;
 }
 
 .l-navbar {
@@ -429,6 +430,80 @@ body {
     background-color: transparent;
 }
 
+.messages-section {
+    display: flex;
+}
+
+.messages {
+    width: 40%;
+    border-right: 2px solid var(--first-color-light);
+    height: 100vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    padding: -7px;
+    margin: -8px;
+}
+
+.message-header {
+    border-bottom: 2px solid var(--first-color-light);
+    font-weight: 800;
+    color: var(--first-color);
+    font-size: 20px;
+    text-align: center;
+    position: sticky;
+    padding: 0;
+    margin: 0;
+}
+
+
+.message {
+    padding-left: 20px;
+    cursor: pointer;
+    border-bottom: 2px solid var(--first-color-light);
+}
+
+.message:hover {
+    background-color: #161a3b;
+    color: #F7F6FB;
+}
+
+.message-unread {
+    background-color: #9fa1ba;
+    color: var(--first-color);
+    font-weight: 800;
+}
+
+
+.message-read {
+    color: #6f6c6c;
+    background-color: var(--white-color)
+}
+
+.add-product {
+    background-color: var(--first-color);
+    color: var(--white-color);
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+}
+
+.add-product:focus{
+    outline: none;
+}
+
+.add-product:hover {
+    background-color: #373a52;
+}
+
+
+
+/* .active-message {
+    background-color: #161a3b;
+    color: #F7F6FB;
+} */
+
 @media screen and (min-width: 568px) {
     #body-pd {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -467,6 +542,9 @@ body {
         padding: 10px;
     }
     
+    .messages {
+        width: 30%;
+    }
 }
 
 @media screen and (max-width: 569px) {

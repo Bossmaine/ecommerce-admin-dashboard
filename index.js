@@ -1,31 +1,77 @@
-let uploadImage = '';
+let uploadImage = [];
 
 function uploadFile() {
-    const file = document.getElementById("photo").files[0]
-    const spinOverlay = document.querySelector('.pagemodal')
-    spinOverlay.style.display = 'block'
-    const cloudName = 'dbkjq1g8x'
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('image', file)
-    formData.append('upload_preset', 'vztcrln6')
-    formData.append('cloud_name', cloudName)
+  const files = document.getElementById("photo").files; document.getElementById('new-product-photo')
+  const spinOverlay = document.querySelector('.pagemodal');
+  spinOverlay.style.display = 'block';
+  const cloudName = 'dbkjq1g8x';
+  const uploadPreset = 'vztcrln6';
 
-    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+  const promises = Array.from(files).map(async file => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', uploadPreset);
+    formData.append('cloud_name', cloudName);
+
+    try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+              method: 'POST',
+              body: formData
+        });
+        const data = await res.json();
+        console.log(data);
+        uploadImage.push(data.url);
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+  Promise.all(promises)
+    .then(() => {
+      spinOverlay.style.display = 'none';
+    })
+    .catch(err => {
+      console.log(err);
+      spinOverlay.style.display = 'none';
+    });
+}
+
+function uploadNewProductFile() {
+    const files = document.getElementById('new-product-photo').files
+    const spinOverlay = document.querySelector('.pagemodal');
+    spinOverlay.style.display = 'block';
+    const cloudName = 'dbkjq1g8x';
+    const uploadPreset = 'vztcrln6';
+
+    const promises = Array.from(files).map(async file => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', uploadPreset);
+    formData.append('cloud_name', cloudName);
+
+    try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
         method: 'POST',
         body: formData
-    }).then(res => res.json())
-    .then(data=> {
-        console.log(data)
-        uploadImage = data.url
-        spinOverlay.style.display = 'none'
+    });
+        const data = await res.json();
+        console.log(data);
+        uploadImage.push(data.url);
+    } catch (err) {
+        console.log(err);
+    }
+    });
 
+    Promise.all(promises)
+        .then(() => {
+        spinOverlay.style.display = 'none';
     })
-    .catch(err=> {
-        console.log(err)
-        spinOverlay.style.display = 'none'
-    })    
+    .catch(err => {
+        console.log(err);
+        spinOverlay.style.display = 'none';
+    });
 }
+
 
 //Sign up API 
 function signUp(event) {
@@ -123,7 +169,6 @@ function logIn(event) {
     event.preventDefault();
     
     const spinner = document.querySelector('.pagemodal')
-    spinner.style.display = 'inline-block';
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -158,20 +203,25 @@ function logIn(event) {
     fetch('http://localhost:7100/api/474892/admin/login', requestOptions)
         .then(response => response.json())
         .then(result => {
-            if (result.message === 'success') {
                 localStorage.setItem('admin', JSON.stringify(result));
-                location.href = 'dashboard.html'
+                const getToken = localStorage.getItem('admin')
+                const theToken = JSON.parse(getToken);
+                if (theToken.message === "success") {
+                    location.href ='dashboard.html';
+                }
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Invalid Login Credentials!',
+                        confirmButtonColor: '#161a3b'
+                    })
+
+                    spinner.style.display = 'none';
+                }
+
             }
     
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    text: 'Invalid Login Credentials!',
-                    confirmButtonColor: '#161a3b'
-                })
-                spinner.style.display = "none";
-            }
-        })
+        )
     .catch(error => error);
 }
 
@@ -181,20 +231,20 @@ window.addEventListener('keyup', function(event) {
     }
 });
 
+let adminMessages; 
 
 function adminDashboard() {
 
     const myPageModal = document.querySelector(".pagemodal");
     myPageModal.style.display = "block";
 
-    const myToken = localStorage.getItem("admin");
-    const theToken = JSON.parse(myToken);
+    const getToken = localStorage.getItem('admin')
+    const theToken = JSON.parse(getToken);
+    console.log(theToken)
     const token = theToken.token;
+    console.log(token)
     const admin = theToken.admin
-
-    if (!token) {
-        location.href = 'index.html'
-    }
+    console.log(admin)
 
     const placeHolderName = document.getElementById('name');
     const placeHolderEmail = document.getElementById('email');
@@ -216,8 +266,7 @@ function adminDashboard() {
         console.log(result)
         if (result.message === 'success') {
             
-            const adminName = document.getElementById('admin-name')
-            const adminImg = document.getElementById('admin-img')
+            
             const getSales = document.getElementById('total-sales');
             const getRevenue = document.getElementById('total-revenue');
             const getCustomers = document.getElementById('total-customers');
@@ -226,15 +275,13 @@ function adminDashboard() {
             const getDeliveres = document.getElementById('total-delivered');
             const getTableDetails = document.getElementById('order-table');
             
-
-            adminName.innerHTML = `${result.data.name}`
-            adminImg.setAttribute('src', result.data.image)
             getSales.innerHTML = `${result.data.totalSales}`;
             getRevenue.innerHTML = `${naira+result.data.totalRevenue.toLocaleString()}`;
             getCustomers.innerHTML = `${result.data.totalUsers}`;
             getPendingOrders.innerHTML = `${result.data.pendingOrdersCount}`;
             getProducts.innerHTML = `${result.data.totalProducts}`;
             getDeliveres.innerHTML = `${result.data.deliveredOrdersCount}`;
+            
 
             let tableData = '';
 
@@ -269,9 +316,36 @@ function adminDashboard() {
     })
     .catch( error => {
         console.error(error)
-        location.href = 'index.html'
+        // location.href = 'index.html'
     })
 
+}
+
+function adminDashInfo() {
+    const getToken = localStorage.getItem('admin')
+    const theToken = JSON.parse(getToken);
+    const admin = theToken.admin
+    const adminMessage = theToken.unreadIssues
+
+    const adminName = document.getElementById('admin-name')
+    const adminImg = document.getElementById('admin-img')
+    const placeHolderName = document.getElementById('name');
+    const placeHolderEmail = document.getElementById('email'); 
+    const messages = document.getElementById('unread-message');
+
+    adminName.innerHTML = `${admin.name}`
+    adminImg.setAttribute('src', admin.image)
+    placeHolderEmail.setAttribute('placeholder', admin.email )
+    placeHolderName.setAttribute('placeholder', admin.name)
+
+    if (adminMessage.length === 0) {
+        messages.style.display='none';
+    }
+    messages.innerHTML=`${adminMessage.length}`;
+}
+
+function openMessage() {
+    location.href = 'messages.html'
 }
 
 function updateAdmin(event) {
@@ -289,7 +363,7 @@ function updateAdmin(event) {
     const warn = document.getElementById('input-warning')
     const success  = document.getElementById('input-success')
     const failed  = document.getElementById('input-failed')
-    const image = uploadImage;
+    const image = uploadImage[0];
 
     if ( !name && !email && !image ) {
         spinner.style.display = 'none';
@@ -318,7 +392,7 @@ function updateAdmin(event) {
         .then(result => {
             if (result.message === 'success') {
                 success.style.display = 'inline-bock';
-                setTimeout(()=>location.reload(),3000);
+                setTimeout(()=>signOut(),3000);
             } else {
                 failed.style.display = 'inline-block';
             }
@@ -392,6 +466,84 @@ function checkInput(input, nextInputId) {
     } else if (input.value.length > 1) {
       input.value = input.value.slice(0, 1);
     }
+}
+
+function adminGetProducts() {
+    const urlParams = new URLSearchParams(window.location.search);
+}
+
+function createProduct(event) {
+    event.preventDefault();
+
+    const spinner = document.querySelector('.pagemodal')
+    spinner.style.display = 'inline-block';
+
+    
+
+    const productName = document.getElementById('product-name').value
+    const productPrice = document.getElementById('product-price').value
+    const productDiscount = document.getElementById('product-discount').value
+    const productCategory = document.getElementById('product-category').value
+    const productImages = uploadImage;
+    const productDescription = document.getElementById('product-description').value
+    const productCountInStock = document.getElementById('product-count').value
+
+    if (!productName || !productPrice || !productCategory || !productImages || !productDescription || !productCountInStock) {
+        Swal.fire({
+            icon: 'error',
+            text: 'All fields with "*" are required!',
+            confirmButtonColor: '#161a3b'
+        })
+
+        spinner.style.display = 'none';
+    }
+
+    const myToken = localStorage.getItem("admin");
+    const theToken = JSON.parse(myToken);
+    const token = theToken.token;
+
+    const data = {
+        name: productName,
+        price: productPrice,
+        discount: productDiscount,
+        category: productCategory,
+        images: productImages,
+        description: productDescription,
+        countInStock: productCountInStock
+    }
+
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          "authorization" :`Bearer ${token}`
+        },
+    };
+
+    fetch('http://localhost:7100/api/products', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'success') {
+            Swal.fire({
+                icon: 'success',
+                text: 'Product Created Successfully!',
+                confirmButtonColor: '#161a3b'
+            })
+    
+            spinner.style.display = 'none';
+            setTimeout(()=>location.reload(), 2500);
+        }
+        else{
+            Swal.fire({
+                icon: 'error',
+                text: 'Error Creating Product',
+                confirmButtonColor: '#161a3b'
+            })
+            spinner.style.display = 'none';
+        }
+    })
+    .catch(error => error)
 }
 
 function tableDetails(id) {
